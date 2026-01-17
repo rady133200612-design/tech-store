@@ -1,38 +1,161 @@
-.App {
-  text-align: center;
+/* استيراد خط القاهرة الاحترافي */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
+
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #0f172a;
+  --bg-color: #f8fafc;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  font-family: 'Cairo', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* تحسين شكل السكرول بار (Scrollbar) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* تأثيرات كروت المنتجات */
+.product-card {
+  transition: var(--transition) !important;
+  border: 1px solid #f1f5f9 !important;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.product-card img {
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.1);
+}
+
+/* تنسيق الأزرار */
+button {
+  transition: var(--transition);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.add-to-cart-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--primary-color) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* تنسيقات حقول الإدخال */
+input, textarea {
+  transition: var(--transition);
+}
+
+input:focus, textarea:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* أنيميشن التحميل (Loader) */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: var(--primary-color);
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* تنسيق الروابط */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* تأثيرات ظهور الصفحات */
+main {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* لوحة الأدمن والطلبات */
+.admin-row {
+  transition: var(--transition);
+}
+
+.admin-row:hover {
+  background-color: #f1f5f9;
+}
+
+/* تنسيق خاص للطباعة (Invoice) */
+@media print {
+  .sidebar, .navbar, button {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .invoice-container {
+    border: none !important;
+    box-shadow: none !important;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* التوافق مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* يمكن تحويله لاحقاً لمنيو سفلي أو همبرغر */
   }
-  to {
-    transform: rotate(360deg);
+  
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
   }
 }
